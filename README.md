@@ -27,6 +27,7 @@ spring.profiles.active=dev
 - 方式二：手动运行下面的 SQL 语句
 
 ```shell
+mysql> DROP DATABASE IF EXISTS mini_fdu;
 mysql> CREATE DATABASE mini_fdu;
 mysql> CREATE USER 'mini_fdu_admin'@'%' IDENTIFIED BY 'password123';
 mysql> GRANT ALL ON mini_fdu.* TO 'mini_fdu_admin'@'%';
