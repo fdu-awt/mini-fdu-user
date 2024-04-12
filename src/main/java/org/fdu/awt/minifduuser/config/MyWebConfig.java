@@ -6,9 +6,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @author ZMARK
- * @className MyWebConfig
- * @description:
- * @date 2023/3/2 17:55
  */
 @SpringBootConfiguration
 public class MyWebConfig implements WebMvcConfigurer {
