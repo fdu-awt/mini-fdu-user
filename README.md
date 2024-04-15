@@ -1,6 +1,6 @@
 # Mini FDU User
 
-2024年春季学期《高级Web技术》课程项目实践
+2024年春季学期《高级Web技术》课程，小组项目实践
 
 ## 技术栈
 
@@ -15,6 +15,7 @@
 配置好数据库，用idea打开本项目进行开发即可。
 
 ## 数据库配置
+
 1. 修改配置文件[application.properties](./src/main/resources/application.properties)，启用dev配置
 
 ```properties
