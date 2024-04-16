@@ -46,10 +46,10 @@ public class UserController {
             userService.register(registerReq);
             return ResultFactory.buildSuccessResult();
         } catch (RepeatedException e) {
-            log.error("register error:" + e.getMessage(), e);
+            log.error("register error:{}", e.getMessage(), e);
             return ResultFactory.buildFailResult(e.getMessage());
         } catch (RuntimeException e) {
-            log.error("register error:" + e.getMessage(), e);
+            log.error("register error:{}", e.getMessage(), e);
             return ResultFactory.buildInternalServerErrorResult();
         }
     }
