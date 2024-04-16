@@ -1,12 +1,13 @@
 package org.fdu.awt.minifduuser.service;
 
-import org.fdu.awt.minifduuser.bo.user.LoginReq;
-import org.fdu.awt.minifduuser.bo.user.RegisterReq;
-import org.fdu.awt.minifduuser.exception.RepeatedEntityException;
+import org.fdu.awt.minifduuser.bo.user.req.LoginReq;
+import org.fdu.awt.minifduuser.bo.user.req.RegisterReq;
+import org.fdu.awt.minifduuser.entity.User;
+import org.fdu.awt.minifduuser.exception.RepeatedException;
 
 public interface IUserService {
-    void register(RegisterReq registerReq) throws RepeatedEntityException;
+    void register(RegisterReq registerReq) throws RepeatedException;
 
-    void login(LoginReq loginReq);
+    User login(LoginReq loginReq);
 
 }

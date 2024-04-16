@@ -3,7 +3,7 @@ package org.fdu.awt.minifduuser.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
-import org.fdu.awt.minifduuser.bo.user.RegisterReq;
+import org.fdu.awt.minifduuser.bo.user.req.RegisterReq;
 
 @Data
 @Entity

@@ -1,4 +1,4 @@
-package org.fdu.awt.minifduuser.bo.user;
+package org.fdu.awt.minifduuser.bo.user.req;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -32,6 +32,6 @@ public class RegisterReq {
 
     @NotNull(message = "密码必填")
     @Size(min = 5, message = "密码长度至少为5")   // 相当于检查了not empty
-    @Size(max = 10, message = "密码长度不能超过10")
+    @Size(max = 15, message = "密码长度不能超过15")
     private String password;
 }

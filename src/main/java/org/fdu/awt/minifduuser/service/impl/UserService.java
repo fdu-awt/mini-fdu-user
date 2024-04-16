@@ -1,10 +1,12 @@
 package org.fdu.awt.minifduuser.service.impl;
 
-import org.fdu.awt.minifduuser.bo.user.LoginReq;
-import org.fdu.awt.minifduuser.bo.user.RegisterReq;
+import lombok.extern.slf4j.Slf4j;
+import org.fdu.awt.minifduuser.bo.user.req.LoginReq;
+import org.fdu.awt.minifduuser.bo.user.req.RegisterReq;
 import org.fdu.awt.minifduuser.dao.UserDAO;
 import org.fdu.awt.minifduuser.entity.User;
-import org.fdu.awt.minifduuser.exception.RepeatedEntityException;
+import org.fdu.awt.minifduuser.exception.NotExistsException;
+import org.fdu.awt.minifduuser.exception.RepeatedException;
 import org.fdu.awt.minifduuser.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
  * @author Violette
  * @date 2024/4/16 11:28
  */
+@Slf4j
 @Service
 public class UserService implements IUserService {
     private final UserDAO userDAO;
@@ -23,17 +26,23 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void register(RegisterReq registerReq) throws RepeatedEntityException {
+    public void register(RegisterReq registerReq) throws RepeatedException {
         User user = userDAO.findByName(registerReq.getName());
         if (user != null) {
-            throw RepeatedEntityException.RepeatEntityName("User", registerReq.getName());
+            throw RepeatedException.RepeatEntity("User", registerReq.getName());
         }
+        // TODO: 密码加密？
         userDAO.save(User.fromRegisterReq(registerReq));
     }
 
     @Override
-    public void login(LoginReq loginReq) {
-
+    public User login(LoginReq loginReq) throws NotExistsException {
+        User user = userDAO.findByNameAndPassword(loginReq.getName(), loginReq.getPassword());
+        if (user == null) {
+            throw new NotExistsException("用户名或密码错误");
+        }
+        log.info("登录成功");
+        return user;
     }
 
 
