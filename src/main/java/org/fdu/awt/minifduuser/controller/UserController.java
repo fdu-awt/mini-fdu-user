@@ -66,10 +66,10 @@ public class UserController {
             LoginResp loginResp = new LoginResp(user.getName(), token, sdf.format(expireTime));
             return ResultFactory.buildSuccessResult(loginResp);
         } catch (NotExistsException e) {
-            log.error("login error:" + e.getMessage(), e);
+            log.error("login error:{}", e.getMessage(), e);
             return ResultFactory.buildFailResult(e.getMessage());
         } catch (RuntimeException e) {
-            log.error("login error:" + e.getMessage(), e);
+            log.error("login error:{}", e.getMessage(), e);
             return ResultFactory.buildInternalServerErrorResult();
         }
     }

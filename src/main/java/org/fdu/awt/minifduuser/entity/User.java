@@ -2,7 +2,10 @@ package org.fdu.awt.minifduuser.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.fdu.awt.minifduuser.bo.user.req.RegisterReq;
 
 @Data
@@ -30,7 +33,7 @@ public class User {
 
     public static User fromRegisterReq(RegisterReq registerReq) {
         return User.builder()
-                .name(registerReq.getName())
+                .name(registerReq.getUsername())
                 .email(registerReq.getEmail())
                 .password(registerReq.getPassword())
                 .build();

@@ -21,7 +21,7 @@ public class RegisterReq {
     @NotNull(message = "用户名必填")
     @Size(min = 3, message = "用户名长度至少为3")  // 相当于检查了not empty
     @Size(max = 10, message = "用户名长度不能超过10")
-    private String name;
+    private String username;
 
     @NotNull(message = "邮箱必填")
     @NotEmpty(message = "邮箱不能为空")

@@ -27,9 +27,9 @@ public class UserService implements IUserService {
 
     @Override
     public void register(RegisterReq registerReq) throws RepeatedException {
-        User user = userDAO.findByName(registerReq.getName());
+        User user = userDAO.findByName(registerReq.getUsername());
         if (user != null) {
-            throw RepeatedException.RepeatEntity("User", registerReq.getName());
+            throw RepeatedException.RepeatEntity("User", registerReq.getUsername());
         }
         // TODO: 密码加密？
         userDAO.save(User.fromRegisterReq(registerReq));
@@ -37,7 +37,7 @@ public class UserService implements IUserService {
 
     @Override
     public User login(LoginReq loginReq) throws NotExistsException {
-        User user = userDAO.findByNameAndPassword(loginReq.getName(), loginReq.getPassword());
+        User user = userDAO.findByNameAndPassword(loginReq.getUsername(), loginReq.getPassword());
         if (user == null) {
             throw new NotExistsException("用户名或密码错误");
         }

@@ -19,7 +19,7 @@ public class LoginReq {
     @NotNull(message = "用户名必填")
     @Size(min = 3, message = "用户名长度至少为3")
     @Size(max = 10, message = "用户名长度不能超过10")
-    private String name;
+    private String username;
 
     @NotNull(message = "密码必填")
     @Size(min = 5, message = "密码长度至少为5")
