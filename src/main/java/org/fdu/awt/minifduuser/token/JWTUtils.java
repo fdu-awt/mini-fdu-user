@@ -5,9 +5,13 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.extern.slf4j.Slf4j;
 import org.fdu.awt.minifduuser.entity.User;
+import org.fdu.awt.minifduuser.service.IUserService;
+import org.fdu.awt.minifduuser.service.impl.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -51,5 +55,23 @@ public class JWTUtils {
     public static Date getExpirationTime(String token) {
         DecodedJWT decodedJWT = verify(token);
         return decodedJWT.getExpiresAt();
+    }
+
+    /**
+     * 根据token获取用户信息
+     *
+     * @param token 用户的token
+     * @return 用户id的Optional对象
+     */
+    public static Optional<Long> getUserIdByToken(String token) {
+        try {
+            DecodedJWT decodedJWT = verify(token);
+            Long userId =Long.parseLong(decodedJWT.getClaims().get("id").asString());
+
+            return Optional.ofNullable(userId);
+        } catch (Exception e) {
+            log.error("Error getting user by token: {}", e.getMessage(), e);
+            return Optional.empty(); // 如果有异常发生，返回空的Optional<User>
+        }
     }
 }

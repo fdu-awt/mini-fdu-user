@@ -23,13 +23,16 @@ public class JWTInterceptor implements HandlerInterceptor {
         String msg;
 
         // 获取请求头中的令牌
-        String token = request.getHeader("token");
-        log.info("请求头中的token是:{}", token);
+        String authorizationHeader = request.getHeader("Authorization");
+        log.info("请求头中的Authorization是:{}", authorizationHeader);
 
         try {
-            if (token == null) {
-                throw new Exception();
+            if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+                throw new Exception("Missing or invalid Authorization header.");
             }
+            // 提取令牌
+            String token = authorizationHeader.substring("Bearer ".length());
+
             // 验证令牌
             DecodedJWT verify = JWTUtils.verify(token);
             return true;
@@ -44,10 +47,11 @@ public class JWTInterceptor implements HandlerInterceptor {
         }
 
         Result result = ResultFactory.buildInsufficientPermissionsResult(msg);
+        // 将result写入响应体
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+        response.getWriter().write(result.toString());
 
-        String jsonResult = new ObjectMapper().writeValueAsString(result);
-        response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().print(jsonResult);
-        return false;
+        return false; // 返回false表示不继续执行后续的controller逻辑
     }
 }

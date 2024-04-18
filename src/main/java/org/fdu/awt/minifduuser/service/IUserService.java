@@ -9,5 +9,8 @@ public interface IUserService {
     void register(RegisterReq registerReq) throws RepeatedException;
 
     User login(LoginReq loginReq);
+    User findByUserId(Long userId);
+
+    User save(User user);
 
 }

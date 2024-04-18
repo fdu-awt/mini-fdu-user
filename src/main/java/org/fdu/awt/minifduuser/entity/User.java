@@ -31,6 +31,9 @@ public class User {
     @Column(nullable = false, name = "password")
     private String password;
 
+    @Column(nullable = false, name = "self_image")
+    private String selfImage;
+
     public static User fromRegisterReq(RegisterReq registerReq) {
         return User.builder()
                 .name(registerReq.getUsername())
