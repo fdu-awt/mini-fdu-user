@@ -4,6 +4,7 @@ package org.fdu.awt.minifduuser.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.fdu.awt.minifduuser.bo.user.req.ModifyReq;
 import org.fdu.awt.minifduuser.bo.user.req.PasswordModifyReq;
+import org.fdu.awt.minifduuser.bo.user.resp.UserInfoResp;
 import org.fdu.awt.minifduuser.entity.User;
 import org.fdu.awt.minifduuser.result.Result;
 import org.fdu.awt.minifduuser.result.ResultFactory;
@@ -34,16 +35,17 @@ public class UserInfoController {
     public Result getUserInfo(@RequestHeader(name = "Authorization", required = false) String authorizationHeader) {
         User user = userInfoService.getUserInfo(authorizationHeader);
         if (user == null) {
-            ResultFactory.buildInsufficientPermissionsResult();
+            return ResultFactory.buildInsufficientPermissionsResult();
+        } else {
+            return ResultFactory.buildSuccessResult(UserInfoResp.fromEntity(user));
         }
-        return ResultFactory.buildSuccessResult(user);
     }
 
     @PostMapping("/modify-user-info")
     public Result modifyUserInfo(@RequestHeader(name = "Authorization", required = false) String authorizationHeader, @Validated @RequestBody ModifyReq modifyReq) {
         User user = userInfoService.modifyUserInfo(authorizationHeader, modifyReq);
         if (user == null) {
-            ResultFactory.buildInsufficientPermissionsResult();
+            return ResultFactory.buildInsufficientPermissionsResult();
         }
         return ResultFactory.buildSuccessResult("修改信息成功", user);
     }
