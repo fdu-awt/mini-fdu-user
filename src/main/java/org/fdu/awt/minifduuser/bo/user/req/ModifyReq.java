@@ -16,8 +16,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ModifyReq {
 
-    private Long id;
-
     @NotNull(message = "用户名必填")
     @Size(min = 3, message = "用户名长度至少为3")  // 相当于检查了not empty
     @Size(max = 10, message = "用户名长度不能超过10")

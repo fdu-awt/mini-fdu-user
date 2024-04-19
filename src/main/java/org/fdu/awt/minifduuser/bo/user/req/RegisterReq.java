@@ -34,4 +34,7 @@ public class RegisterReq {
     @Size(min = 5, message = "密码长度至少为5")   // 相当于检查了not empty
     @Size(max = 15, message = "密码长度不能超过15")
     private String password;
+
+    @NotNull(message = "个人形象必填")
+    private String selfImage;
 }
