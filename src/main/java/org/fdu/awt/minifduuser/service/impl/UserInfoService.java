@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.fdu.awt.minifduuser.bo.user.req.ModifyReq;
 import org.fdu.awt.minifduuser.dao.UserDAO;
 import org.fdu.awt.minifduuser.entity.User;
-import org.fdu.awt.minifduuser.result.ResultFactory;
 import org.fdu.awt.minifduuser.service.IUserInfoService;
 import org.fdu.awt.minifduuser.token.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +58,7 @@ public class UserInfoService implements IUserInfoService {
             return -1;
         }
         //密码不正确
-        if(!oldPassword.equals(user.getPassword())){
+        if (!oldPassword.equals(user.getPassword())) {
             return -2;
         }
         user.setPassword(newPassword);
@@ -86,6 +85,4 @@ public class UserInfoService implements IUserInfoService {
 
         return findByUserId(userId);
     }
-
-
 }

@@ -25,10 +25,8 @@ public class ModifyReq {
     @NotEmpty(message = "邮箱不能为空")
     @Email(message = "邮箱格式不正确")
     @Size(max = 30, message = "邮箱长度不能超过30")
-
     private String email;
 
     @NotNull(message = "个人形象必填")
     private String selfImage;
-
 }
