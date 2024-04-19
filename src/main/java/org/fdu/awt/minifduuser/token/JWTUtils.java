@@ -63,9 +63,8 @@ public class JWTUtils {
     public static Optional<Long> getUserIdByToken(String token) {
         try {
             DecodedJWT decodedJWT = verify(token);
-            Long userId =Long.parseLong(decodedJWT.getClaims().get("id").asString());
-
-            return Optional.ofNullable(userId);
+            Long userId = Long.parseLong(decodedJWT.getClaims().get("id").asString());
+            return Optional.of(userId);
         } catch (Exception e) {
             log.error("Error getting user by token: {}", e.getMessage(), e);
             return Optional.empty(); // 如果有异常发生，返回空的Optional<User>
