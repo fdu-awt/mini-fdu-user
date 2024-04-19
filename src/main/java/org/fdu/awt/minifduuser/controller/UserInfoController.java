@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/userinfo-service")
+@RequestMapping("/user-service")
 public class UserInfoController {
     private final IUserInfoService userInfoService;
 
