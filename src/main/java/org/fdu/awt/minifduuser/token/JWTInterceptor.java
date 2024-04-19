@@ -50,8 +50,7 @@ public class JWTInterceptor implements HandlerInterceptor {
         // 将result写入响应体
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
-        response.getWriter().write(result.toString());
-
+        response.getWriter().write(new ObjectMapper().writeValueAsString(result));
         return false; // 返回false表示不继续执行后续的controller逻辑
     }
 }
