@@ -45,7 +45,7 @@ public class JWTInterceptor implements HandlerInterceptor {
         } catch (Exception e) {
             msg = "token无效";
         }
-
+        log.warn("token验证失败:{}", msg);
         Result result = ResultFactory.buildInsufficientPermissionsResult(msg);
         // 将result写入响应体
         response.setContentType("application/json");
