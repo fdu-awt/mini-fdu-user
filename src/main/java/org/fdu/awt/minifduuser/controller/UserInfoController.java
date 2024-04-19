@@ -3,6 +3,7 @@ package org.fdu.awt.minifduuser.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.fdu.awt.minifduuser.bo.user.req.ModifyReq;
+import org.fdu.awt.minifduuser.bo.user.req.PasswordModifyReq;
 import org.fdu.awt.minifduuser.entity.User;
 import org.fdu.awt.minifduuser.result.Result;
 import org.fdu.awt.minifduuser.result.ResultFactory;
@@ -48,8 +49,8 @@ public class UserInfoController {
     }
 
     @PostMapping("/modify-user-password")
-    public Result modifyUserPassword(@RequestHeader(name = "Authorization", required = false) String authorizationHeader, String oldPassword, String newPassword) {
-        int code = userInfoService.modifyUserPassword(authorizationHeader, oldPassword, newPassword);
+    public Result modifyUserPassword(@RequestHeader(name = "Authorization", required = false) String authorizationHeader, @Validated @RequestBody PasswordModifyReq req) {
+        int code = userInfoService.modifyUserPassword(authorizationHeader, req.getOldPassword(), req.getNewPassword());
         if (code == -1) {
             return ResultFactory.buildInsufficientPermissionsResult();
         }
@@ -58,5 +59,4 @@ public class UserInfoController {
         }
         return ResultFactory.buildSuccessResult("修改密码成功");
     }
-
 }
