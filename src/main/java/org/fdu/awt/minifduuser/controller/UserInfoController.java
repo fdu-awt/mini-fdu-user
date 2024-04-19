@@ -7,13 +7,9 @@ import org.fdu.awt.minifduuser.entity.User;
 import org.fdu.awt.minifduuser.result.Result;
 import org.fdu.awt.minifduuser.result.ResultFactory;
 import org.fdu.awt.minifduuser.service.IUserInfoService;
-import org.fdu.awt.minifduuser.service.IUserService;
-import org.fdu.awt.minifduuser.token.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 /**
  * @author zouzouyi
@@ -29,35 +25,37 @@ public class UserInfoController {
     private final IUserInfoService userInfoService;
 
     @Autowired
-    public UserInfoController(IUserInfoService userInfoService) {this.userInfoService = userInfoService;}
+    public UserInfoController(IUserInfoService userInfoService) {
+        this.userInfoService = userInfoService;
+    }
 
     @GetMapping("/get-user-info")
     public Result getUserInfo(@RequestHeader(name = "Authorization", required = false) String authorizationHeader) {
-        User user= userInfoService.getUserInfo(authorizationHeader);
-        if(user == null) {
+        User user = userInfoService.getUserInfo(authorizationHeader);
+        if (user == null) {
             ResultFactory.buildInsufficientPermissionsResult();
         }
         return ResultFactory.buildSuccessResult(user);
     }
 
     @PostMapping("/modify-user-info")
-    public Result modifyUserInfo(@RequestHeader(name = "Authorization", required = false) String authorizationHeader, @Validated @RequestBody ModifyReq modifyReq){
-       User user= userInfoService.modifyUserInfo(authorizationHeader,modifyReq);
-       if(user == null) {
-           ResultFactory.buildInsufficientPermissionsResult();
-       }
-       return ResultFactory.buildSuccessResult("修改信息成功",user);
+    public Result modifyUserInfo(@RequestHeader(name = "Authorization", required = false) String authorizationHeader, @Validated @RequestBody ModifyReq modifyReq) {
+        User user = userInfoService.modifyUserInfo(authorizationHeader, modifyReq);
+        if (user == null) {
+            ResultFactory.buildInsufficientPermissionsResult();
+        }
+        return ResultFactory.buildSuccessResult("修改信息成功", user);
     }
 
     @PostMapping("/modify-user-password")
-    public Result modifyUserPassword(@RequestHeader(name = "Authorization", required = false) String authorizationHeader, String oldPassword, String newPassword){
-       int code = userInfoService.modifyUserPassword(authorizationHeader,oldPassword,newPassword);
-       if(code == -1) {
-           return ResultFactory.buildInsufficientPermissionsResult();
-       }
-       if(code == -2) {
-          return  ResultFactory.buildFailResult("输入密码错误");
-       }
+    public Result modifyUserPassword(@RequestHeader(name = "Authorization", required = false) String authorizationHeader, String oldPassword, String newPassword) {
+        int code = userInfoService.modifyUserPassword(authorizationHeader, oldPassword, newPassword);
+        if (code == -1) {
+            return ResultFactory.buildInsufficientPermissionsResult();
+        }
+        if (code == -2) {
+            return ResultFactory.buildFailResult("输入密码错误");
+        }
         return ResultFactory.buildSuccessResult("修改密码成功");
     }
 
