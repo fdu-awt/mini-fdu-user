@@ -17,8 +17,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PasswordModifyReq {
     @NotNull(message = "密码必填")
-    @Size(min = 5, message = "密码长度至少为5")
-    @Size(max = 15, message = "密码长度不能超过15")
     private String oldPassword;
 
     @NotNull(message = "密码必填")
