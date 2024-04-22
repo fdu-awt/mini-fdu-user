@@ -35,3 +35,32 @@ mysql> GRANT ALL ON mini_fdu.* TO 'mini_fdu_admin'@'%';
 mysql> FLUSH PRIVILEGES;
 mysql> quit
 ```
+
+## 热部署
+
+1. `pom.xml` 中添加依赖（已添加）
+
+   ```xml
+    <!--devtools热部署-->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <optional>true</optional>
+        <scope>true</scope>
+    </dependency>
+    ```
+
+2. 在配置文件中配置一下devtools（`application-dev.properties` 中已经添加）
+
+    ```properties
+    # devtools
+    ## start the devtools
+    spring.devtools.restart.enabled=true
+    spring.devtools.restart.additional-paths=src/main/java
+    spring.devtools.restart.exclude=static/**,public/**,resources/**,META-INF/**,templates/**,WEB-INF/**
+    ```
+
+3. 在idea中设置
+
+    - （1）File-Settings-Compiler-Build Project automatically
+    - （可能没有，可以忽略）（2）ctrl + shift + alt + / ,选择Registry,勾上 Compiler autoMake allow when app running
