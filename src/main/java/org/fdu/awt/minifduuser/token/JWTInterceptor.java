@@ -21,6 +21,7 @@ public class JWTInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String msg;
+        String exceptionMsg = null;
 
         // 获取请求头中的令牌
         String authorizationHeader = request.getHeader("Authorization");
@@ -37,15 +38,23 @@ public class JWTInterceptor implements HandlerInterceptor {
             DecodedJWT verify = JWTUtils.verify(token);
             return true;
         } catch (SignatureVerificationException e) {
-            msg = "无效签名";
+            // 无效签名
+            exceptionMsg = e.getMessage();
+            msg = "未登录";
         } catch (TokenExpiredException e) {
-            msg = "token过期";
+            // token过期
+            exceptionMsg = e.getMessage();
+            msg = "登陆状态已过期";
         } catch (AlgorithmMismatchException e) {
-            msg = "token算法不一致";
+            // token算法不一致
+            exceptionMsg = e.getMessage();
+            msg = "未登录";
         } catch (Exception e) {
-            msg = "token无效";
+            // token无效
+            exceptionMsg = e.getMessage();
+            msg = "未登录";
         }
-        log.warn("token验证失败:{}", msg);
+        log.warn("token验证失败: msg: {}, exceptionMsg: {}", msg, exceptionMsg);
         Result result = ResultFactory.buildInsufficientPermissionsResult(msg);
         // 将result写入响应体
         response.setContentType("application/json");
