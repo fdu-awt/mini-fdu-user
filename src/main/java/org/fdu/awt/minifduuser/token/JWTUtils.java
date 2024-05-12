@@ -30,13 +30,12 @@ public class JWTUtils {
         instance.add(Calendar.DATE, 7);
 
         // 生成token
-        String token = JWT.create()
+
+        return JWT.create()
                 .withClaim("id", user.getId().toString())
                 .withClaim("name", user.getName())
                 .withExpiresAt(instance.getTime()) // token过期时间
-                .sign(Algorithm.HMAC256(SING));    // 密钥
-
-        return token;
+                .sign(Algorithm.HMAC256(SING));
     }
 
     /**
