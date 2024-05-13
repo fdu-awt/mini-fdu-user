@@ -39,4 +39,19 @@ CREATE TABLE `quiz`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 
+DROP TABLE IF EXISTS `quiz_record`;
+CREATE TABLE `quiz_record`
+(
+    `id`          INT          NOT NULL AUTO_INCREMENT,
+    `user_id`     INT       NOT NULL,
+    `quiz_id`     INT       NOT NULL,
+    `answer`      VARCHAR(255) NOT NULL COMMENT '用户回答',
+    `is_correct`  BOOLEAN      NOT NULL COMMENT '该次回答是否正确',
+    `create_timestamp` TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '答题时间',
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`quiz_id`) REFERENCES quiz (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
+
+
 SET FOREIGN_KEY_CHECKS = 1;
