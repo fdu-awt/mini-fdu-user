@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.fdu.awt.minifduuser.bo.user.req.ModifyReq;
 import org.fdu.awt.minifduuser.bo.user.req.RegisterReq;
 
 @Data
