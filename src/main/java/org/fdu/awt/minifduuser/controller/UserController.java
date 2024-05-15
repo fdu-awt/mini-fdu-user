@@ -63,7 +63,7 @@ public class UserController {
             String token = JWTUtils.getToken(user);
             Date expireTime = JWTUtils.getExpirationTime(token);
 
-            LoginResp loginResp = new LoginResp(user.getName(), token, sdf.format(expireTime));
+            LoginResp loginResp = new LoginResp(user.getId(), user.getName(), token, sdf.format(expireTime));
             return ResultFactory.buildSuccessResult(loginResp);
         } catch (NotExistsException e) {
             log.error("login error:{}", e.getMessage(), e);

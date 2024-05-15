@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginResp {
+    Long id;
     String username;
     String token;
     String tokenExpireTime;
