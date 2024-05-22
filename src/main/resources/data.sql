@@ -1,13 +1,13 @@
 use mini_fdu;
 
 INSERT INTO `user` (`name`, `email`, `password`,`self_image`) VALUES
-    ('Violette', 'violette@example.com', 'violette123','花时来信_神里绫华');
+    ('Violette', 'violette@example.com', 'violette123','Doctor');
 
 INSERT INTO `user` (`name`, `email`, `password`,`self_image`) VALUES
-    ('Rosy', 'rosy@example.com', 'rosy123','多莉');
+    ('Rosy', 'rosy@example.com', 'rosy123','Doctor');
 
 INSERT INTO `user` (`name`, `email`, `password`,`self_image`) VALUES
-    ('ZMark', 'zmark@example.com', 'zmark123','那维莱特');
+    ('ZMark', 'zmark@example.com', 'zmark123','BusinessMan');
 
 INSERT INTO `user` (`name`, `email`, `password`,`self_image`) VALUES
-    ('chenbuchen', 'chenbuchen@example.com', 'chenbuchen123','荒泷一斗');
+    ('chenbuchen', 'chenbuchen@example.com', 'chenbuchen123','FireFighter');
