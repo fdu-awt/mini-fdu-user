@@ -62,7 +62,12 @@
 2. 构建docker镜像
 
 ```shell
+# 本地构建
 docker build -t mini-fdu-user:1.0.0 .
+# 构建并推送到docker hub
+## 如果需要推送到自己的docker hub，需要先登录，并更改 zmarkgo 为自己的用户名
+docker build -t zmarkgo/mini-fdu-user:1.0.0 .
+docker push zmarkgo/mini-fdu-user:1.0.0
 ```
 
 ## 使用docker部署后端
